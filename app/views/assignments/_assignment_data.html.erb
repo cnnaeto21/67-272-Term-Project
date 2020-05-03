@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-content">
+    <p>
+      <h4>
+        <%= @assignment.name %>
+      </h4>
+    </p>
+    <p>
+      <b>Employee:</b><br>
+      <%= link_to @assignment.employee.proper_name, employee_path(@assignment.employee.proper_name) %><br />
+    </p><br />
+
+    <p>
+      <b>Store:</b><br>
+      <%= link_to @assignment.store.name, store_path(@assignment.store.name) %>
+    </p><br />
+
+    <p>
+      <b>Dates:</b><br>
+      <%= @assignment.start_date.strftime("%-m/%-d/%y") %> - <%= @assignment.end_date.nil? ? 'Present' : @assignment.end_date.strftime("%-m/%-d/%y") %>
+    </p><br />
+  </div>
+</div>

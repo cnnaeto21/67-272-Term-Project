@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-content">
+    <h5><%= state.capitalize %> Shifts</h5>
+
+    <% if shifts.empty? %>
+      <p>There are no <%= state.downcase %> shifts at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th> Details </th>
+          <th>Employee</th>
+          <th>Store Name</th>
+          <th>Date</th>
+          <th>Times</th>
+          <th>Status</th>
+          <% if state.downcase == "finished" %>
+            <th>Add Jobs</th>
+          <%end%>
+        </thead>
+        <% shifts.each do |shift| %>
+          <tr %>
+            <td><%= link_to "Info", shift_path(shift)%></td>
+            <td><%= link_to shift.employee.proper_name, employee_path(shift.employee)%></td>
+            <td><%= link_to shift.assignment.store.name, store_path(shift.assignment.store) %></td>
+            <td><%= shift.date.strftime("%-m/%-d/%y") %></td>
+            <td><%= shift.start_time.strftime("%I:%M %p") %> - <%= shift.end_time.nil? ? ' ' : shift.end_time.strftime("%I:%M %p") %>
+            <td><%= shift.status.capitalize%></td>
+            <% if state.downcase == "finished"  && !shift.report_completed?%>
+                <td>
+                    <%= link_to new_shift_job_path(shift_id: shift.id), class: "waves-effect waves-light btn" do %>
+                    <strong>Record Jobs</strong>
+                    <% end %>
+                </td>
+            <%end%>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+      <%= will_paginate shifts, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+      <br />
+    <% end %>
+  </div>
+</div>

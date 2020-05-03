@@ -1,0 +1,3 @@
+<% @upcoming_shifts.reload%>
+<%= render partial: 'shifts_list', locals: { state: 'Upcoming', 
+                                                  shifts: @upcoming_shifts } %>

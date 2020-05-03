@@ -8,6 +8,7 @@
 
       <table class="striped highlight">
         <thead>
+          <th>Details</th>
           <th>Employee Name</th>
           <th>Store Name</th>
           <th>Dates</th>
@@ -15,6 +16,7 @@
         </thead>
         <% assignments.each do |assignment| %>
           <tr %>
+            <td><%= link_to "Show Details", assignment_path(assignment)%></td>
             <td><%= link_to assignment.employee.name, employee_path(assignment.employee) %></td>
             <td><%= link_to assignment.store.name, store_path(assignment.store) %></td>
             <td><%= assignment.start_date.strftime("%-m/%-d/%y") %> - <%= assignment.end_date.nil? ? 'Present' : assignment.end_date.strftime("%-m/%-d/%y") %></td>

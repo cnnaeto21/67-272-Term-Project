@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-content">
+    <h5><%= state.capitalize %> Pay Grades</h5>
+
+    <% if payGrades.empty? %>
+      <p>There are no <%= state.downcase %> pay grades at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th> Level </th>
+          <th>Rate</th>
+          <th>Number of Employees</th>
+          <th> Options </th>
+        </thead>
+        <% payGrades.each do |grade| %>
+          <tr %>
+            <td><%= grade.level %></td>
+            <td><%= grade.pay_grade_rates.current.first.rate %></td>
+            <td class = "center-aligned"><%= grade.assignments.current.count %></td>
+            <td>
+                <%= link_to edit_pay_grade_path(grade) do %>
+                <i class="material-icons">edit</i>
+                <% end %>
+            </td>
+            <td>
+                <%= link_to(pay_grades_path(grade), method: :delete, data: { confirm: 'Are you sure you wish to delete this pay grade?' }) do %>
+                    <i class="material-icons">delete</i>
+                <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+      <%= will_paginate payGrades, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+      <br />
+    <% end %>
+  </div>
+</div>

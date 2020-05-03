@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-content">
+    <h4> Job Name: <%=@job.name %></h4>
+    <b>Number of Shifts:&nbsp;&nbsp;</b><br>
+    <%= @job.shift_jobs.count%><br /><br />
+    <b> Active ?:&nbsp;&nbsp;</b><br>
+    <%= @job.active ? "Yes" : "No" %>
+  </div>
+</div>

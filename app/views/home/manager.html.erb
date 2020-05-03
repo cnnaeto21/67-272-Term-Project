@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col s5">
+          <%= form_with url: search_path, method: :get, class: "form-inline", id: "search" do %>
+              <%= text_field_tag 'query', '', placeholder: "Search Employees..." %>
+              <!-- submitting via js (press enter) so not using... -->
+              <% # submit_tag('Search') %>
+          <% end %>
+    </div>
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<%= render partial: 'partials/index_structure', locals: {model_name: 'shift', 
+                                                         primary: 'finished_shifts', 
+                                                         secondary: 'pending_shifts',
+                                                         sidebar: 'missed_shifts'} %>

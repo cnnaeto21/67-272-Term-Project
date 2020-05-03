@@ -1,0 +1,7 @@
+<% if current_user.role?(:employee) %>
+    <%= render partial: 'shifts3_list', locals: { state: 'Current', 
+                                                  shifts: @current_shifts } %>
+<%else%>
+    <%= render partial: 'shifts_list', locals: { state: 'Current', 
+    shifts: @current_shifts } %>
+<%end%>

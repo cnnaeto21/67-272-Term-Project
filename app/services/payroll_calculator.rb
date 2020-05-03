@@ -12,6 +12,7 @@ class PayrollCalculator
   def create_payrolls_for(store)
     reset_payrolls_hash
     all_shifts = Shift.for_store(store).for_dates(date_range).by_employee
+    byebug
     all_shifts.each do |shift|
       add_to_payrolls(shift)
     end

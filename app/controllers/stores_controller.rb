@@ -1,7 +1,8 @@
 class StoresController < ApplicationController
 
   before_action :set_store, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_login
+  authorize_resource
 
   def index
     # get data on all stores and paginate the output to 10 per page
@@ -12,6 +13,9 @@ class StoresController < ApplicationController
   def show
     @current_managers = @store.assignments.current.map{|a| a.employee}.sort_by{|e| e.name}.select{|e| e.role == 'manager'}
     @current_employees = @store.assignments.current.map{|a| a.employee}.sort_by{|e| e.name}
+
+    @upcoming_shifts = Shift.for_store(@store).for_next_days(7).chronological.paginate(page: params[:page]).per_page(5)
+    @past_shifts = Shift.for_store(@store).for_past_days(7).chronological.paginate(page: params[:page]).per_page(5)
   end
 
   def new

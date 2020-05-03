@@ -8,12 +8,14 @@
 
       <table class="striped highlight">
         <thead>
+          <th>Info</th>
           <th>Employee</th>
           <th>Date</th>
           <th>Starting</th>
         </thead>
         <% shifts.each do |shift| %>
           <tr %>
+            <td><%= link_to "Info", shift_path(shift) %></td>
             <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
             <td><%= shift.date.strftime("%-m/%-d") %></td>
             <td><%= shift.start_time.strftime("%l:%M %P") %></td>

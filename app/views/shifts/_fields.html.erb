@@ -1,0 +1,14 @@
+<% if current_user.current_assignment.nil? && current_user.role?(:manager)%>
+    <%= redirect_to manager_home_path alert: "You do not currently have an assignment. You cannot edit shifts"%>
+<%elsif current_user.role?(:admin)%>
+    <%= f.input :assignment_id, collection: Assignment.current.by_employee.to_a, include_blank: true %>
+<%else%>
+    <%= f.input :assignment_id, collection: Assignment.current.for_store(current_user.current_assignment.store).by_employee.to_a, include_blank: true %>
+<%end%>
+<%= f.input :date, label_html: { class: 'active' } %>
+<%= f.input :start_time, input_html: { class: 'timepicker'}%>
+<%= f.input :end_time, input_html: { class: 'timepicker'} %>
+<%= f.input :notes, label_html: {class: 'active'}%>
+<%= f.input :status, collection: Shift::STATUS_LIST, include_blank: true %>
+
+

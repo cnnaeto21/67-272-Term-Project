@@ -12,6 +12,10 @@
     <!-- render the sidebar, if it exists -->
     <%= render partial: "#{sidebar}" unless sidebar.blank? %>
   </div>
+
+  <div class="col s8">
+    <%= render partial: "#{sidebar2}" unless sidebar2.blank? %>
+  </div>
 </div>
 <div class="row">
   <%= render :partial => 'partials/display_base_errors', locals: {object: object} %>
