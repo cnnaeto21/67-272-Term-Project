@@ -1,0 +1,10 @@
+
+<% if current_user.current_assignment.nil? && current_user.role?(:manager)%>
+    <%= redirect_to manager_home_path alert: "You do not currently have an assignment. You cannot edit shifts"%>
+<%elsif current_user.role?(:admin)%>
+    <%= f.input :shift_id, collection: Shift.finished.chronological.to_a, include_blank: true  %>
+    <%= f.input :job_id, collection: Job.active.alphabetical.to_a, include_blank: true %>
+<%else%>
+    <%= f.input :shift_id, collection: Shift.for_store(current_user.current_assignment.store).finished.chronological.to_a, include_blank: true  %>
+    <%= f.input :job_id, collection: Job.active.alphabetical.to_a, include_blank: true %>
+<%end%>

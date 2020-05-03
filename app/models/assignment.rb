@@ -37,6 +37,10 @@ class Assignment < ApplicationRecord
     self.reload
   end
 
+  def name 
+    self.employee.name + "'s Assignment" 
+  end
+
   # Callbacks
   before_create :end_previous_assignment
 

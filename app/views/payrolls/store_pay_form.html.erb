@@ -1,0 +1,7 @@
+<%= simple_form_for :payroll, url: store_calc_path, method: :get, local:true do |p| %>
+    <%= p.collection_select(:store_id, Store.active.alphabetical, :id, :name) %>
+    <%= p.collection_radio_buttons :options, [[2.weeks.ago, '2 weeks'] ,[1.month.ago, '1 month']], :first, :last %>
+    <%= p.input :start, input_html:{ class: 'datepicker'} %>
+    <%= p.input :end, input_html:{ class: 'datepicker'} %>
+    <%= p.submit "Generate Pay Roll"  %>
+<% end %>

@@ -18,13 +18,20 @@
 //= require best_in_place
 //= require_tree .
 
+
 // @import "materialize";
 // @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+
+$(document).ready(function(){
+  $('.carousel').carousel();
+});
+$('.carousel').carousel();
 
 // Flash fade
 $(function() {
   $('.alert-box').fadeIn('normal', function() {
-     $(this).delay(3700).fadeOut();
+     $(this).delay(4000).fadeOut();
   });
 });
 
@@ -44,4 +51,25 @@ $(document).ready(function() {
     }
   }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.timepicker');
+  var instances = M.Timepicker.init(elems, options);
+});
+
+
+$(document).ready(function(){
+  $('.datepicker').datepicker();
+});
+$('.datepicker').datepicker();
+       
+
+
+
+
+$(document).ready(function(){
+  $('.timepicker').timepicker();
+});
+
+$('.timepicker').timepicker();
 

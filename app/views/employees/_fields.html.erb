@@ -2,5 +2,11 @@
 <%= f.input :last_name, label_html: { class: 'active' } %>
 <%= f.input :date_of_birth, label_html: { class: 'active' } %>
 <%= f.input :phone, label_html: { class: 'active' } %>
-<%= f.input :role, collection: Employee::ROLES_LIST, include_blank: true %>
+<% if current_user.role?(:admin) %>
+    <%= f.input :role, collection: Employee::ROLES_LIST, include_blank: true %>
+    <%= f.input :ssn, label_html: {class: 'active'} %>
+<%end%>
+<%= f.input :username, label_html: {class: 'active'} %>
+<%= f.input :password, label_html: {class: 'active'} %>
+<%= f.input :password_confirmation, label_html: { class: 'active' } %>
 <%= f.input :active %>

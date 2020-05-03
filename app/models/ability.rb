@@ -4,7 +4,6 @@ class Ability
     def initialize(employee)
         employee ||= Employee.new
 
-
         if employee.role? :admin
             can :manage, :all
 
@@ -49,8 +48,16 @@ class Ability
             can :update, Employee do |this_emp|
                 this_emp.id == employee.id 
             end
+
+            can :index, Shift
+            can :show, Shift do |shift|
+                employee.shifts.include?(shift)
+            end
+
+            can :start, Shift
+            can :end, Shift
         else 
-            can :read, :all
+            #can :read, :all
         end 
     end 
 end 

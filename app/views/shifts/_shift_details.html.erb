@@ -1,0 +1,71 @@
+<div class="card">
+  <div class="card-content">
+    <p>
+      <h4>
+        <b> Shift Details </b>
+      </h4>
+    </p>
+
+    <p>
+      <b>Employee:</b><br>
+      <%= @shift.assignment.employee.proper_name %><br />
+    </p><br />
+    <p>
+      <b>Store:</b><br>
+      <%= @shift.assignment.store.name %><br />
+    </p><br />
+
+    <p>
+      <b>Date:</b><br>
+      <%= @shift.date.strftime("%-m/%-d/%y") %>
+    </p><br />
+
+    <p>
+      <b>Times:</b><br>
+      <%= @shift.start_time.strftime("%I:%M %p") %> - <%= @shift.end_time.nil? ? ' ' : @shift.end_time.strftime("%I:%M %p") %>
+    </p><br />
+
+    <p>
+      <b>Status:</b><br>
+      <%= @shift.status.capitalize %>
+    </p><br />
+
+    <p>
+
+    <p>
+      <b>Notes:</b><br>
+      <%= @shift.notes %>
+    </p><br />
+    <p>
+        <b>Missed?:</b><br>
+        <%= @shift.status == 'pending' && Shift.past.include?(@shift) ? "Yes" : "No" %>
+    </p><br />
+
+    <p>
+      <b>Report Completed?:</b> 
+      <%= @shift.report_completed? ? "Yes" : "No" %>
+    </p><br />
+
+    <p>
+      <b>Job(s) worked:</b><br>
+      <%= 'n/a' if @jobs_worked.empty? %>
+      <% @jobs_worked.each do |sjob| %>
+        <%= sjob.job.name %><br />
+      <% end %>
+    </p><br />
+
+    <% if @shift.report_completed?  %>
+        <% if current_user.role?(:admin) || current_user.role?(:manager) %>
+            <p>
+            <%= link_to edit_shift_job_path(@shift.shift_jobs.first), class: "waves-effect waves-light btn" do %>
+                <strong>Edit Jobs Worked</strong>
+            <% end %>
+            </p>
+        <% end %>
+    <%end%>
+
+    
+
+
+  </div>
+</div>

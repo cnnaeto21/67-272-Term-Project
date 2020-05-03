@@ -1,13 +1,23 @@
-<h5>A&M Creamery Home</h5>
-
-<p>This is our very creative home page.</p>
-<p>Now go away.</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>What are you still doing here?  Can't you follow instructions?</p>
-	
-<%# render :partial => 'general_home' %>
+<div class="row"> 
+    <h5> Welcome to A&M Creamery</h5>
+    <div class="col s9">
+    <div class="carousel">
+      <a class="carousel-item" href="#one"><%= image_tag 'sundae.jpg' %></a>
+      <a class="carousel-item" href="#two"><%= image_tag 'sundae.jpg' %></a>
+      <a class="carousel-item" href="#three"><%= image_tag 'sundae.jpg' %></a>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <p>The A&M Animal Creamery is a family owned ice cream parlor 
+            with out primary location in Pittsburgh PA. Come visit 
+            us at one of our many tri-state locations listed below.
+        </p>
+      </div>
+    </div>
+  </div>   
+    <%# render :partial => 'general_home' %>
+</div>
+<%= render partial: 'partials/index_structure', locals: {model_name: 'store', 
+                                                         primary: 'home_store_list', 
+                                                         secondary: nil,
+                                                         sidebar: nil} %>

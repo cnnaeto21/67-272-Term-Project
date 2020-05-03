@@ -1,0 +1,33 @@
+<div class = "row">
+    <div class="card">
+        <div class="card-content">
+            <h4>Stores Performance FROM: <%= 7.days.ago.to_date.strftime("%-m/%d")%> TO: <%= Date.today.to_date.strftime("%-m/%d")%></h4>
+            <table class="striped highlight">
+                <thead>
+                <th>Name</th>
+                <th>Manager</th>
+                <th>Missed Shifs</th>
+                <th class="align_center">Calculate Payroll</th>
+                </thead>
+                <% stores.each do |store| %>
+                    <%@current_manager = store.assignments.current.map{|a| a.employee}.sort_by{|e| e.name}.select{|e| e.role == 'manager'} %>
+                    <tr %>
+                        <td><%= link_to store.name, store_path(store) %></td>
+                        <td>
+                            <%= 'n/a' if @current_manager.empty? %>
+                            <% @current_manager.each do |manager| %>
+                                <%= link_to manager.proper_name, employee_path(manager) %><br />
+                            <% end %>
+                        </td>
+                        <td><%= Shift.for_store(store).past.pending.count %></td>
+                        <td class="align_center">
+                            <%= link_to "Calculate Pay Roll", store_payroll_path(store_id: store.id) %>
+                        </td>
+                    </tr>
+                <% end %>
+            </table>
+            <p class="supertiny"></p>
+            <br />
+        </div>
+    </div>
+</div>

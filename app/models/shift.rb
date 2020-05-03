@@ -2,6 +2,8 @@ class Shift < ApplicationRecord
   include AppHelpers::Validations
   include AppHelpers::Deletions
 
+  #time_attribute :time
+
   # Relationships
   belongs_to :assignment
   has_one :employee, through: :assignment
@@ -48,6 +50,10 @@ class Shift < ApplicationRecord
   def duration
     (round_minutes(self.end_time) - round_minutes(self.start_time, direction: :down))/3600.0
   end
+
+  def name
+    "#{self.employee.proper_name}" + "'s Shift"
+  end
   
   # Callbacks
   # set default end_time (on create only)
@@ -64,7 +70,8 @@ class Shift < ApplicationRecord
   # Misc Constants
   STATUS_LIST = [['Pending', 'pending'],['Started', 'started'],['Finished', 'finished']].freeze
 
-
+  #include TimeClock
+  
   private
   def assignment_starts
     @assignment_starts = self.assignment.start_date.to_date

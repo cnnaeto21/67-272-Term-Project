@@ -1,0 +1,50 @@
+<div class="card">
+  <div class="card-content">
+    <h5><%= state.capitalize %> Shifts</h5>
+
+    <% if shifts.empty? %>
+      <p>There are no <%= state.downcase %> shifts at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th> Clock In/Out </th>
+          <th> Details </th>
+          <th>Store Name</th>
+          <th>Date</th>
+          <th>Times</th>
+          <th>Status</th>
+        </thead>
+        <% shifts.each do |shift| %>
+          <tr %>
+            <% if (shift.date.to_date == Date.today.to_date) && shift.status == "pending"%>
+                <td>
+                    <%= link_to start_shift_path(shift), method: :patch, class: "waves-effect waves-light btn" do %>
+                        <strong>Clock In</strong>
+                    <% end %>
+                </td>
+            <% elsif (shift.date.to_date == Date.today.to_date) && shift.status == "started"%>
+                <td>
+                    <%= link_to end_shift_path(shift),method: :patch, class: "waves-effect waves-light btn" do %>
+                        <strong>Clock Out</strong>
+                    <% end %>
+                </td>
+            <% else %>
+                <td></td>   
+            <%end%>
+            <td><%= link_to "Info", shift_path(shift)%></td>
+            <td><%= link_to shift.assignment.store.name, store_path(shift.assignment.store) %></td>
+            <td><%= shift.date.strftime("%-m/%-d/%y") %></td>
+            <td><%= shift.start_time.strftime("%I:%M %p") %> - <%= shift.end_time.nil? ? ' ' : shift.end_time.strftime("%I:%M %p") %>
+            <td><%= shift.status.capitalize%></td>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+      <%= will_paginate shifts, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+      <br />
+    <% end %>
+  </div>
+</div>

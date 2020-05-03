@@ -18,6 +18,11 @@
     </p><br />
 
     <p>
+      <b>Number of employees over 18:</b><br>
+      <%= number_to_phone @store.employees.younger_than_18.count %>
+    </p><br />
+
+    <p>
       <b>Manager(s):</b><br>
       <%= 'n/a' if @current_managers.empty? %>
       <% @current_managers.each do |manager| %>

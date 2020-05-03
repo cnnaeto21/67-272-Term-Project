@@ -1,5 +1,15 @@
 <div class="card">
   <div class="card-content">
+
+    <% if ((current_user.role?(:manager) && (current_user.current_assignment.store.name == @employee.current_assignment.store.name)) || current_user.role?(:admin))%>
+      <div class = "center-align">
+        <%= link_to new_shift_path(assignment_id: @employee.current_assignment.id), class: "waves-effect waves-light btn" do %>
+          <strong> Assign Shift for <%= @employee.proper_name %></strong>
+        <% end %>
+      </div>
+    <%end%>
+    &nbsp;&nbsp;
+    &nbsp;&nbsp;
     <h4><%= @employee.proper_name %></h4>
     <h5><%= @employee.role.capitalize %></h5><br />
 
@@ -15,11 +25,16 @@
     <b>Phone:&nbsp;&nbsp;</b><br>
       <%= number_to_phone @employee.phone %><br /><br />
 
-    <b>Social Security Number:&nbsp;&nbsp;</b><br>
-      <%= number_to_ssn @employee.ssn %><br /><br />
+    <%if current_user == @employee%>
+      <b>Social Security Number:&nbsp;&nbsp;</b><br>
+        <%= number_to_ssn @employee.ssn %><br /><br />
+    <%end%>
 
     <b>Date of Birth:&nbsp;&nbsp;</b><br>
-      <%= @employee.date_of_birth.to_datetime.strftime("%b %-d, %Y") %><br /><br />
+      <%= @employee.date_of_birth.to_datetime.strftime("%b %-d, %Y") %>  (<%= @employee.age %> years old)<br /><br />
+
+    <b>Shifts missed this week:</b><br>
+      <%= Shift.for_employee(@employee).for_past_days(7).past.pending.count %><br /><br />
 
 
     <b>Active with AMC?&nbsp;&nbsp;</b>

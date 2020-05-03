@@ -1,0 +1,11 @@
+
+<div class = "right-align">
+    <%= link_to pay_grade_rates_path, class: "waves-effect waves-light btn" do %>
+        <strong>View Pay Rates</strong>
+    <% end %>
+</div>
+
+<%= render partial: 'partials/index_structure', locals: {model_name: 'pay_grade', 
+                                                         primary: 'active_grades_lists', 
+                                                         secondary: 'inactive_grades_lists',
+                                                         sidebar: nil} %>
