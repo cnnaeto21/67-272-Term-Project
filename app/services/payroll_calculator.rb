@@ -13,6 +13,7 @@ class PayrollCalculator
     reset_payrolls_hash
     all_shifts = Shift.for_store(store).for_dates(date_range).by_employee
     byebug
+    puts "THE SHIFTS ARE EMPTY" if all_shifts.empty?
     all_shifts.each do |shift|
       add_to_payrolls(shift)
     end
@@ -40,6 +41,7 @@ class PayrollCalculator
     employee = shift.employee
     payroll = get_or_set_employee_payroll_object(employee, shift)
     revised_payroll = increment_pay_earned(payroll, shift)
+    #byebug
     payrolls[employee] = revised_payroll
   end
 

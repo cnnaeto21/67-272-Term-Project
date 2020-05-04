@@ -21,7 +21,7 @@
                         </td>
                         <td><%= Shift.for_store(store).past.pending.count %></td>
                         <td class="align_center">
-                            <%= link_to "Calculate Pay Roll", store_payroll_path(store_id: store.id) %>
+                            <%= link_to "Calculate Pay Roll", store_payroll_path(store) %>
                         </td>
                     </tr>
                 <% end %>

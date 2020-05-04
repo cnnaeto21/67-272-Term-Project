@@ -22,8 +22,8 @@ Rails.application.routes.draw do
 
   resources :assignments
   resources :shifts
-  resources :payrolls
-  get 'pay_roll', to: 'payrolls#store_pay_form', as: :store_payroll
+  #resources :payrolls
+  get 'payroll/:id/new', to: 'payrolls#store_pay_form', as: :store_payroll
   get 'payrolls', to: 'payrolls#store_calc', as: :store_calc
 
   get 'employees/:id/payroll', to: 'payroll#emp_pay', as: :emp_pay
