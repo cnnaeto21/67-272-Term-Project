@@ -17,7 +17,7 @@
         </thead>
         <% shifts.each do |shift| %>
           <tr %>
-            <% if (shift.date.to_date == Date.today.to_date) && shift.status == "pending"%>
+            <% if (shift.date.to_date == Date.today.to_date) && shift.status == "pending" && Time.now.to_date > shift.end_time %>
                 <td>
                     <%= link_to start_shift_path(shift), method: :patch, class: "waves-effect waves-light btn" do %>
                         <strong>Clock In</strong>
@@ -29,6 +29,12 @@
                         <strong>Clock Out</strong>
                     <% end %>
                 </td>
+              <% elsif (shift.date.to_date == Date.today.to_date) && shift.status == "pending" && Time.now.to_date < shift.end_time %>
+                      <td>
+                        <%= link_to start_shift_path(shift), method: :patch, class: "waves-effect waves-light btn" do %>
+                          <strong>MISSED!</strong>
+                        <% end %>
+                      </td>
             <% else %>
                 <td></td>   
             <%end%>

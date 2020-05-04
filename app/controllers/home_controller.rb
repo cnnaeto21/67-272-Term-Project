@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   end
 
   def contact
+    @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)
   end
 
   def privacy
