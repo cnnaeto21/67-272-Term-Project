@@ -1,22 +1,25 @@
 <div class="card">
   <div class="card-content">
-    <h4><%= state.capitalize %> pay statment </h4>
-
+    <h4><%= state.capitalize %> Pay statment </h4>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <% if rolls.empty? %>
       <p>There are no pay statements available at this time.</p>
     <% else %>
 
       <table class="striped highlight">
+        <h5> Store: <%=rolls[0].employee.current_assignment.store.name%> FROM: <%=@calc.start_date.strftime("%-m/%-d/%y")%> TO: <%=@calc.end_date.strftime("%-m/%-d/%y")%> </h5>
         <thead>
           <th>Employee Name</th>
+          <th>Pay Rate</th>
           <th>Total Hours</th>
           <th>Pay Earned</th>
         </thead>
         <% rolls.each do |roll| %>
           <tr>
             <td><%= link_to roll.employee_name, employee_path(roll.employee_name) %></td>
+            <td> $ <%= link_to roll.pay_rate, pay_grade_rate_path(roll.pay_rate) %></td>
             <td><%= roll.hours %></td>
-            <td><%= roll.pay_earned %></td>
+            <td> $ <%= roll.pay_earned.round(2) %></td>
           </tr>
         <% end %>
       </table>

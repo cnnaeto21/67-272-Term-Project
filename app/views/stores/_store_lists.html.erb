@@ -11,6 +11,7 @@
           <th>Name</th>
           <th>Current Assignments</th>
           <th>Phone</th>
+          <th>Calculate Payroll</th>
           <th class="align_center">Options</th>
         </thead>
         <% stores.each do |store| %>
@@ -18,7 +19,13 @@
             <td><%= link_to store.name, store_path(store) %></td>
             <td><%= store.assignments.current.count %></td>
             <td><%= number_to_phone store.phone %></td>
-
+            <% if store.active?%>
+              <td class="align_center">
+                <%= link_to "Calculate Pay Roll", store_payroll_path(store) %>
+              </td> 
+            <%else%>
+              <td>n/a</td>
+            <%end%>
             <td class="align_center">
               <%= link_to edit_store_path(store) do %>
                 <i class="material-icons">edit</i>

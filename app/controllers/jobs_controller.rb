@@ -39,7 +39,7 @@ class JobsController < ApplicationController
 
     def destroy
         @job.destroy
-        redirect_to jobss_path, notice: "Removed job from the system."
+        redirect_to jobs_path, notice: "Removed job from the system."
       end
 
     private

@@ -73,3 +73,6 @@ $(document).ready(function(){
 
 $('.timepicker').timepicker();
 
+
+document.getElementById('input').checked = false;
+

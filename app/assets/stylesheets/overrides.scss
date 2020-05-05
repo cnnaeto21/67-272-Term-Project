@@ -1,8 +1,8 @@
 html {
   // Preloaded with three fonts; uncomment the one you prefer
   // font-family: 'Alfa Slab One', cursive;
-  font-family: 'Nunito', sans-serif;
-  // font-family: 'Bitter', serif;
+  // font-family: 'Nunito', sans-serif;
+  font-family: 'Bitter', serif;
   // font-family: 'Josefin Sans', sans-serif;
 }
 
@@ -278,6 +278,13 @@ li.no_bullet {
 
 
   [type="radio"]:not(:checked), [type="radio"]:checked {
+    position: relative !important;
     opacity: 100 !important;
     pointer-events: auto !important;
+    box-sizing: border-box;
+    padding: 10 !important;
+    padding-top: 10px !important;
+    padding-right: 400px !important;
+    padding-bottom: 10px !important;
+    padding-left: 400px !important;
 }

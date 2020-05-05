@@ -1,9 +1,32 @@
-<%= simple_form_for :payroll, url: store_calc_path , method: :get, local:true do |p| %>
-    <%= p.input :store_id, collection: Store.active.alphabetical%>
-    <%= p.collection_radio_buttons :options, [[2.weeks.ago.to_date, '2 weeks'] ,[1.month.ago.to_date, '1 month']], :first, :last, { item_wrapper_tag: true }%>
-    <%= p.input :start, input_html:{ class: 'datepicker'} %>
-    <%= p.input :end, input_html:{ class: 'datepicker'} %>
-    <%= p.submit "Generate Pay Roll"  %>
- <% end %>
+<div class="col s7">
+    <div class="card">    
+      <div class="card-content">
+        <span class="card-title">New Payroll</span>
+          <div class="row">
+            <div class="form-inputs">
+                <%= simple_form_for :payroll, url: store_calc_path , method: :get, local: true do |p| %>
+                    <%= p.input :store_id, collection: Store.active.alphabetical,include_blank: true%>
+                    <%= p.input :start, input_html:{ class: 'datepicker'} %>
+                    <%= p.input :end, input_html:{ class: 'datepicker'} %>
+                    <div class = "col s8">
+                        Custom Dates:
+                        <%= p.collection_radio_buttons :options, [[2.weeks.ago, '2 weeks'] ,[1.month.ago, '1 month']], :first, :last, { item_wrapper_tag: false }%>
+                    </div>
+                    <%= p.submit "Generate Pay Roll"  %>
+                <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="form-actions col s9">
+        </div>
+      </div>
+    </div>
+</div>
+<%= link_to 'Back', :back %>
+
+
+
  
  

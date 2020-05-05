@@ -16,8 +16,12 @@
         <% payGrades.each do |grade| %>
           <tr %>
             <td><%= grade.level %></td>
-            <td><%= grade.pay_grade_rates.current.first.rate %></td>
-            <td class = "center-aligned"><%= grade.assignments.current.count %></td>
+            <% if !grade.pay_grade_rates.current.first.nil? %>
+                <td><%= grade.pay_grade_rates.current.first.rate %></td>
+                <%else%>
+                    <td> n/a </td>
+            <%end%>
+            <td><%= grade.assignments.current.count %></td>
             <td>
                 <%= link_to edit_pay_grade_path(grade) do %>
                 <i class="material-icons">edit</i>

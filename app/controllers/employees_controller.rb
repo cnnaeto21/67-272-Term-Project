@@ -20,8 +20,13 @@ class EmployeesController < ApplicationController
 
   def show
     retrieve_employee_assignments
-    @upcoming_shifts = Shift.for_employee(@employee).for_next_days(7).chronological.paginate(page: params[:page]).per_page(5)
-    @past_shifts = Shift.for_employee(@employee).for_past_days(7).chronological.paginate(page: params[:page]).per_page(5)
+    if current_user.current_assignment.nil?
+      @upcoming_shifts = []
+      @past_shifts = []
+    else
+      @upcoming_shifts = Shift.for_employee(@employee).for_next_days(7).chronological.paginate(page: params[:page]).per_page(5)
+      @past_shifts = Shift.for_employee(@employee).for_past_days(7).chronological.paginate(page: params[:page]).per_page(5)
+    end
   end
 
   def new
@@ -61,8 +66,13 @@ class EmployeesController < ApplicationController
   end
 
   def retrieve_employee_assignments
-    @current_assignment = @employee.current_assignment
-    @previous_assignments = @employee.assignments.to_a - [@current_assignment]
+    if @employee.current_assignment.nil?
+      @current_assignment = []
+      @previous_assignments = []
+    else
+      @current_assignment = @employee.current_assignment
+      @previous_assignments = @employee.assignments.to_a - [@current_assignment]
+    end
   end
 
 end

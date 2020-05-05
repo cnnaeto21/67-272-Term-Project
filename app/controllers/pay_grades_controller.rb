@@ -22,7 +22,7 @@ class PayGradesController < ApplicationController
     def create
         @paygrade = PayGrade.new(grade_params)
         if @paygrade.save
-          redirect_to @paygrade, notice: "Successfully added #{@paygrade.level} pay grade to the system."
+          redirect_to pay_grades_path, notice: "Successfully added #{@paygrade.level} pay grade to the system."
         else
           render action: 'new'
         end

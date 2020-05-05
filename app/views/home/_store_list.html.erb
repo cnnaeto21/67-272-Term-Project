@@ -26,6 +26,14 @@
                     </tr>
                 <% end %>
             </table>
+            &nbsp;&nbsp;&nbsp;
+            <div class = "center-align">
+                <% if current_user.role?(:admin) %>
+                    <%= link_to new_pay_grade_rate_path, class: "waves-effect waves-light btn" do %>
+                        <strong>Add a New Pay Rate </strong>
+                    <% end %>
+                <% end %>
+            </div>
             <p class="supertiny"></p>
             <br />
         </div>

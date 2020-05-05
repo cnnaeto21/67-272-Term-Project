@@ -22,14 +22,22 @@
             <td><%= assignment.start_date.strftime("%-m/%-d/%y") %> - <%= assignment.end_date.nil? ? 'Present' : assignment.end_date.strftime("%-m/%-d/%y") %></td>
             <td>
               <% if state.downcase == 'current' %>
-                <%= link_to(terminate_assignment_path(assignment), method: :patch) do %>
-                  <i class="material-icons">stop</i>
-                <% end %>
+                <%if current_user.role?(:admin) || current_user.role?(:manager) %>
+                  <%= link_to(terminate_assignment_path(assignment), method: :patch) do %>
+                    <i class="material-icons">stop</i>
+                  <% end %>
+                <%else%>
+                    Not Available
+                <%end%>
               <% end %>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <%= link_to(assignment_path(assignment), method: :delete, data: { confirm: 'Are you sure you wish to delete this assignment?' }) do %>
-                  <i class="material-icons">delete</i>
-              <% end %>
+              <% if current_user.role?(:admin) || current_user.role?(:manager) %>
+                <%= link_to(assignment_path(assignment), method: :delete, data: { confirm: 'Are you sure you wish to delete this assignment?' }) do %>
+                    <i class="material-icons">delete</i>
+                <% end %>
+              <%else%>
+                  <td></td>
+              <%end%>
             </td>
           </tr>
         <% end %>
